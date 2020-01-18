@@ -23,12 +23,22 @@ def main():
 
     embedding = EmbeddingModelWrapper(args.embedding, 100)
 
+    jaccard = JaccardSimilarity()
+    cosine = CosineSimilarity(embedding)
+    wmd = WordMoverDistance(embedding)
+    sif_cosine = SifCosineSimilarity(embedding)
+    ensemble = CustomEnsembleSimilarity([
+        (jaccard, 0.1),
+        (sif_cosine, 0.3),
+        (wmd, 0.6)
+    ])
+
     algos = {
-        "jaccard": JaccardSimilarity(),
-        "wmd": WordMoverDistance(embedding),
-        "cosine": CosineSimilarity(embedding),
-        "ensemble": CustomEnsembleSimilarity(embedding),
-        "sif-cosine": SifCosineSimilarity(embedding)
+        "jaccard": jaccard,
+        "wmd": wmd,
+        "cosine": cosine,
+        "ensemble": ensemble,
+        "sif-cosine": sif_cosine
     }
 
     result = algos[args.algorithm].normalized_score(args.sentence1, args.sentence2)

@@ -1,20 +1,13 @@
 import numpy as np
 
 from common.SemanticSimilarityAlgorithm import SemanticSimilarityAlgorithm
-from cosine.SifCosineSimilarity import SifCosineSimilarity
-from jaccard.JaccardSimilarity import JaccardSimilarity
-from wmd.WordMoverDistance import WordMoverDistance
 
 
 class CustomEnsembleSimilarity(SemanticSimilarityAlgorithm):
 
-    def __init__(self, embedding):
+    def __init__(self, algos):
         super().__init__()
-        self.algos = [
-            (WordMoverDistance(embedding), 0.6),
-            (SifCosineSimilarity(embedding), 0.3),
-            (JaccardSimilarity(), 0.1),
-        ]
+        self.algos = algos
 
     def _absolute_score(self, sentence_1, sentence_2):
         return np.average(
