@@ -1,0 +1,4 @@
+*.iml
+.idea
+venv
+embeddings/skip_gram*
