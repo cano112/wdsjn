@@ -9,7 +9,7 @@ class SifCosineSimilarity(SemanticSimilarityAlgorithm):
 
     def __init__(self, embedding):
         super().__init__()
-        self.a = 100
+        self.a = 0.001
         self.embedding = embedding
 
     def _absolute_score(self, sentence_1, sentence_2):
