@@ -46,7 +46,7 @@ def main():
         Algorithm.wmd.name: wmd,
         Algorithm.cosine.name: cosine,
         Algorithm.ensemble.name: ensemble,
-        Algorithm.sif_cosine: sif_cosine
+        Algorithm.sif_cosine.name: sif_cosine
     }
 
     result = algos[args.algorithm].normalized_score(args.sentence1, args.sentence2)
